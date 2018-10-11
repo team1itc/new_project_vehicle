@@ -16,7 +16,7 @@ optional{
   pk_feed
   pk_like_feed
   pk_comment_feed
-  pk_img
+  pk_img            // how to upload?
 }
 
 
