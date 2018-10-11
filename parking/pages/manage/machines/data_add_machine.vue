@@ -97,20 +97,21 @@
 
         data () {
             return {
+              username:sessionStorage.getItem("username"),
               previewImage:null,
-            mc_code:"",
-            mc_brand:"",
-            mc_series: '',
-            std_id: '',
+              mc_code:"",
+              mc_brand:"",
+              mc_series:'',
+              std_id:'',
 
-            type_api:"",
-            danger:false,
-            conf_del:false,
-            isEditing:null,
-            rules: {
-                  required: value => !!value || 'ห้ามว่าง.',
-                  // counter: value => value.length <= 10 || 'เต็ม 10 ตัวอักษร',
-            },
+              type_api:"",
+              danger:false,
+              conf_del:false,
+              isEditing:null,
+              rules: {
+                    required: value => !!value || 'ห้ามว่าง.',
+                    // counter: value => value.length <= 10 || 'เต็ม 10 ตัวอักษร',
+              },
           }
         },
         methods:{
@@ -121,6 +122,7 @@
                 mc_brand:this.mc_brand,
                 mc_series:this.mc_series,
                 std_id:this.std_id,
+                username:this.username
               })
               if(res.data.ok==true){this.danger=true,this.alt_txt=res.data.txt,this.type_api=res.data.alt}
               else{this.danger=true,this.alt_txt=res.data.txt,this.type_api=res.data.alt}
