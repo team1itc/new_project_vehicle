@@ -6,11 +6,10 @@ main{
   pk_department      // มีปัญหากับข้อมูลจาก mis
   pk_machine         // ok
   pk_group           // ok
-  pk_match_std_tch
+  pk_match_std_tch   // ok
   pk_teacher         // filter group
 }
 
-ถังขยะ
 ตั้งค่า
 
 optional{
@@ -18,7 +17,6 @@ optional{
   pk_like_feed
   pk_comment_feed
   pk_img
-  ช่วยเหลือ
 }
 
 
