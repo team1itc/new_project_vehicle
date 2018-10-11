@@ -137,12 +137,10 @@
             
             },
         },
-         computed: {
-            formIsValid () {
-            return (
-            this.conf_pass==this.password
-      )
-    }
-  },
+        computed: {
+          formIsValid () {
+            return (this.conf_pass==this.password)
+          }
+        },
     }
 </script>
