@@ -86,7 +86,7 @@
                   v-model="std_lname"
                 ></v-text-field>
             </v-flex>
-           <v-flex xs12>
+           <v-flex xs6>
 
              <v-dialog
                     ref="modal"
@@ -118,15 +118,17 @@
                       <v-btn flat color="primary" @click="modal = false">Cancel</v-btn>
                       <v-btn flat color="primary" @click="$refs.modal.save(std_birthday)">OK</v-btn></v-date-picker>
               </v-dialog>
-
-              <!-- <v-text-field
-                prepend-icon="fas fa-birthday-cake"
-                placeholder="วัน เดือน ปี เกิด เช่น 8 พฤษภาคม 2540"
-                name="std_birthday"
-                v-model="std_birthday"
-                ></v-text-field>-->
             </v-flex>
-           
+            <v-flex xs6>
+                <v-select
+                  :items="bld"
+                  v-model="std_blood"
+                  menu-props="auto"
+                  label="หมู่เลือด"
+                  hide-details
+                  prepend-icon="fas fa-hospital"
+                  ></v-select>
+              </v-flex>
           </v-layout>
         </v-container>
         <v-card-actions>
@@ -145,30 +147,30 @@
 
         data () {
             return {
-
-            std_code:"",
-            std_gender:"",
-            std_prename:"",
-            std_name:"",
-            std_lname:"",
-            std_pin_id:"",
-            std_birthday:"",
-            std_blood:"",
-            g_code:"",
-            type_api:"",
-            danger:false,
-            alt_txt:"",
-            item_group:[],
-            bld:['A', 'B', 'O','AB' ],
-            item_pre_name:['นาย','นางสาว','นาง',],
-            rules: {
-                  required: value => !!value || 'ห้ามว่าง.',
-                  // counter: value => value.length <= 10 || 'เต็ม 10 ตัวอักษร',
-            },
-            modal: false,
-            date: null,
-          dateFormatted: null,
-          menu1: false,
+              username:sessionStorage.getItem("username"),
+              std_code:"",
+              std_gender:"",
+              std_prename:"",
+              std_name:"",
+              std_lname:"",
+              std_pin_id:"",
+              std_birthday:"",
+              std_blood:"",
+              g_code:"",
+              type_api:"",
+              danger:false,
+              alt_txt:"",
+              item_group:[],
+              bld:['A', 'B', 'O','AB' ],
+              item_pre_name:['นาย','นางสาว','นาง',],
+              rules: {
+                    required: value => !!value || 'ห้ามว่าง.',
+                    // counter: value => value.length <= 10 || 'เต็ม 10 ตัวอักษร',
+              },
+              modal: false,
+              date: null,
+              dateFormatted: null,
+              menu1: false,
 
           }
         },
@@ -198,37 +200,35 @@
               std_birthday:this.dateFormatted,
               std_blood:this.std_blood,
               g_code:this.g_code,
+              username:this.username
             })
             if(res.data.ok==true){this.danger=true,this.alt_txt=res.data.txt,this.type_api=res.data.alt}
             else{this.danger=true,this.alt_txt=res.data.txt,this.type_api=res.data.alt}
           },
           async sh_group(){
             let res=await this.$http.get('/group/list/')
-            // this.item_group=res.data.datas.g_id  
-            // console.log(res.data.datas.g_id)
-            // console.log("item_group="+this.item_group.g_code)
           },
-    student(){
-            this.$router.push({name:"manage-student"})
+          student(){
+                  this.$router.push({name:"manage-student"})
+                },
+          formatDate (std_birthday) {
+            if (!std_birthday) return null
+
+            const [year, month, day] = std_birthday.split('-')
+            return `${day}/${month}/${year}`
           },
-    formatDate (std_birthday) {
-      if (!std_birthday) return null
+          parseDate (std_birthday) {
+            if (!std_birthday) return null
 
-      const [year, month, day] = std_birthday.split('-')
-      return `${day}/${month}/${year}`
-    },
-    parseDate (std_birthday) {
-      if (!std_birthday) return null
-
-      const [month, day, year] = std_birthday.split('/')
-      return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
-    }
+            const [month, day, year] = std_birthday.split('/')
+            return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
+          }
+              },
+          computed: {
+          computedDateFormatted () {
+            return this.formatDate(this.std_birthday)
+          }
         },
-    computed: {
-    computedDateFormatted () {
-      return this.formatDate(this.std_birthday)
-    }
-  },
 
     }
     

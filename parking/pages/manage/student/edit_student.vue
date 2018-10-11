@@ -153,6 +153,7 @@
 
         data () {
           return {
+            username:sessionStorage.getItem("username"),
             std_id:"",
             std_code:'',
             std_pin_id:"",
@@ -181,7 +182,19 @@
         methods:{
             conf_del(){this.conf_del=true},
             async std_del(){console.log("std_del")
-              let res=await this.$http.get('/student/std_del/'+this.$route.query.std_id)
+              let res=await this.$http.post('/student/std_del/',{
+                std_id:this.$route.query.std_id,
+                std_code:this.std_code,
+        				std_pin_id:this.std_pin_id,
+        				std_prename:this.std_prename,
+        				std_name:this.std_name,
+        				std_lname:this.std_lname,
+        				std_birthday:this.std_birthday,
+        				std_gender:this.std_gender,
+        				std_blood:this.std_blood,
+        				g_code:this.g_code,
+                username:this.username
+              })
               if(res.data.ok==true){this.$router.push({name:"manage-student"})}
               else{this.danger=true,this.alt_txt=res.data.txt,this.type_api=res.data.alt}
             },
@@ -213,7 +226,7 @@
         				std_blood:this.std_blood,
         				g_code:this.g_code,
                 std_id:std_id,
-
+                username:this.username
               })
               console.log(res.data)
                 if(res.data.ok==true){this.danger=true,this.alt_txt=res.data.txt,this.type_api=res.data.alt}

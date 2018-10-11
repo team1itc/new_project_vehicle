@@ -108,19 +108,20 @@
 
         data () {
             return {
-            mc_code:"",
-            mc_brand:"",
-            mc_series: '',
-            std_id: '',
+              username:sessionStorage.getItem("username"),
+              mc_code:"",
+              mc_brand:"",
+              mc_series:'',
+              std_id:'',
 
-            type_api:"",
-            danger:false,
-            conf_del:false,
-            isEditing:null,
-            rules: {
-                  required: value => !!value || 'ห้ามว่าง.',
-                  // counter: value => value.length <= 10 || 'เต็ม 10 ตัวอักษร',
-            },
+              type_api:"",
+              danger:false,
+              conf_del:false,
+              isEditing:null,
+              rules: {
+                    required: value => !!value || 'ห้ามว่าง.',
+                    // counter: value => value.length <= 10 || 'เต็ม 10 ตัวอักษร',
+              },
           }
         },
         async created(){
@@ -129,7 +130,14 @@
         methods:{
           conf_del(){this.conf_del=true},
           async machines_del(){
-            let res=await this.$http.get('/machine/machine_del/'+this.$route.query.mc_id)
+            let res=await this.$http.post('/machine/machine_del/',{
+              mc_id:this.$route.query.mc_id,
+              mc_code:this.mc_code,
+              mc_brand:this.mc_brand,
+              mc_series:this.mc_series,
+              std_id:this.std_id,
+              username:this.username
+            })
             if(res.data.ok==true){this.$router.push({name:"manage-machines"})}
             else{this.danger=true,this.alt_txt=res.data.txt,this.type_api=res.data.alt}
           },
@@ -141,6 +149,7 @@
             this.mc_brand=res.data.datas.mc_brand
             this.mc_series=res.data.datas.mc_series
             this.std_id=res.data.datas.std_id
+            
           },
           async machine_update(mc_id){
             //console.log("mc_id"+mc_id)
@@ -150,6 +159,7 @@
               mc_series:this.mc_series,
               std_id:this.std_id,
               mc_id:mc_id,
+              username:this.username, 
             })
             console.log(res.data)
               if(res.data.ok==true){this.danger=true,this.alt_txt=res.data.txt,this.type_api=res.data.alt,this.sh_machine()}

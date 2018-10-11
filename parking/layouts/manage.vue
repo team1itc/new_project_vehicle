@@ -181,6 +181,16 @@
         { icon: 'fas fa-motorcycle', text: 'ยานพาหนะ' ,link: '../../manage/machines'},
 
         { divider: true },
+        { icon: 'keyboard_arrow_up',
+          'icon-alt': 'fas fa-book', 
+          text: 'บันทึกระบบ' , 
+          children: [
+            { icon: 'fas fa-user-graduate', text: 'นักเรียน / นักศึกษา' ,link: '../../manage/log/student'},
+            { icon: 'fas fa-chalkboard-teacher', text: 'ครู / บุคลากร' ,link: '../../manage/log/teacher'},
+            { icon: 'fas fa-place-of-worship', text: 'แผนกวิชา' ,link: '../../manage/log/department'},
+            { icon: 'fas fa-users', text: 'กลุ่มการเรียน' ,link: '../../manage/log/group'},
+            { icon: 'fas fa-motorcycle', text: 'ยานพาหนะ' ,link: '../../manage/log/machines'},
+        ]},
         { icon: 'delete', text: 'ถังขยะ' ,link: 'trash'},
         { divider: true },
         { 

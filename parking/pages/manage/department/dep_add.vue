@@ -57,6 +57,8 @@
         layout: 'manage',
         data(){
           return{
+            username:sessionStorage.getItem("username"),
+            u_id:sessionStorage.getItem("id"),
             d_code:"",
             d_name:"",
             type_api:"",
@@ -73,7 +75,7 @@
               let res=await this.$http.post("department/dep_add",{
                 d_code:this.d_code,
                 d_name:this.d_name,
-  
+                username:this.username
               })
               if(res.data.ok==true){this.danger=true,this.alt_txt=res.data.txt,this.type_api=res.data.alt}
               else{this.danger=true,this.alt_txt=res.data.txt,this.type_api=res.data.alt}
