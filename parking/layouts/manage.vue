@@ -157,7 +157,8 @@
       dialog: false,
       drawer: null,
       items: [
-      { icon: 'fas fa-chalkboard', text: 'dashboard' ,link: ''},
+      { heading: 'โปรไฟล์' },
+      { icon: 'fas fa-user-circle', text: 'แก้ไขข้อมูลส่วนตัว' ,link: '../../manage/profile'},
       { divider: true },
        { heading: 'จัดการข้อมูล' },
         {
