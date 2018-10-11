@@ -192,7 +192,7 @@
             { icon: 'fas fa-users', text: 'กลุ่มการเรียน' ,link: '../../manage/log/group'},
             { icon: 'fas fa-motorcycle', text: 'ยานพาหนะ' ,link: '../../manage/log/machines'},
         ]},
-        { icon: 'delete', text: 'ถังขยะ' ,link: 'trash'},
+
         { divider: true },
         { 
          icon: 'keyboard_arrow_up',
@@ -203,7 +203,6 @@
             { icon:'fas fa-user-shield' ,text: 'ความปลอดภัย' ,link: '../../manage/security/set_password'},
             { icon:'fas fa-sliders-h' ,text: 'ระบบ' },
           ]},
-        { icon: 'help', text: 'ช่วยเหลือ' },
         { icon: 'fas fa-sign-out-alt', text: 'ออกจากระบบ' ,link:"../../logout"},
         
       ],
