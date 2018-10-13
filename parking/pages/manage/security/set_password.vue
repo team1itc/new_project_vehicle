@@ -83,7 +83,7 @@
 
 <script>
     export default {
-        layout: 'manage',
+        layout:sessionStorage.getItem("cv_layout"),
 
         data () {
             return {
@@ -129,6 +129,7 @@
 
               let res=await this.$http.post("/teacher/select_id",{
                 t_password:this.password,
+                t_username:this.t_username,
                 t_id:t_id
               })
               console.log(res.data)

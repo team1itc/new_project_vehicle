@@ -1,10 +1,10 @@
 <template>
   <div>
     <div class="cv_header">บันทึกระบบ</div>
-    <div class="cv_header">แผนกวิชา</div>
+    <div class="cv_header">นักเรียน / นักศึกษา</div>
   <v-data-table
       :headers="headers"
-      :items="department"
+      :items="student"
       :search="search"
       :pagination.sync="pagination"
       :loading=state
@@ -26,10 +26,15 @@
     </template>
     <template slot="items" slot-scope="props">
       <tr>
-        <td class="text-xs-left">{{ props.item.d_log_date }}</td>
-        <td class="text-xs-left">{{ props.item.d_log_work }}</td>
-        <td class="text-xs-left">{{ props.item.d_code }}</td>
-        <td class="text-xs-left">{{ props.item.d_name }}</td>
+        <td class="text-xs-left">{{ props.item.std_log_date }}</td>
+        <td class="text-xs-left">{{ props.item.std_log_work }}</td>
+        <td class="text-xs-left">{{ props.item.std_code }}</td>
+        <td class="text-xs-left">{{ props.item.std_gender }}</td>
+        <td class="text-xs-left">{{ props.item.std_prename }}{{ props.item.std_name }} {{ props.item.std_lname }}</td>
+        <td class="text-xs-left">{{ props.item.std_pin_id }}</td>
+        <td class="text-xs-left">{{ props.item.std_birthday }}</td>
+        <td class="text-xs-left">{{ props.item.std_password }}</td>
+        <td class="text-xs-left">{{ props.item.g_code }}</td>
         <td class="text-xs-left">{{ props.item.u_id }}</td>
       </tr>
     </template>
@@ -47,6 +52,7 @@
     layout:sessionStorage.getItem("cv_layout"),
     data () {
       return {
+        
         state:false,
         search: '',
         pagination: {},
@@ -55,17 +61,22 @@
         headers: [
           { text: 'วันที่', value: 'วันที่ทำการบันทึก',align: 'left',sortable: false,  },
           { text: 'การทำงาน', value: 'การทำงาน',align: 'left',sortable: false,  },
-          { text: 'รหัสแผนก', value: 'รหัสแผนก',align: 'left',sortable: false, },
-          { text: 'ชื่อแผนก', value: 'ชื่อแผนก',align: 'left',sortable: false, },          
+          { text: 'รหัสประจำตัวนักเรียน / นักศึกษา', value: 'รหัสประจำตัวนักเรียน / นักศึกษา',align: 'left',sortable: false, },
+          { text: 'เพศ', value: 'เพศ',align: 'left',sortable: false, },     
+          { text: 'ชื่อ - นามสกุล', value: 'ชื่อ - นามสกุล',align: 'left',sortable: false, },       
+          { text: 'รหัสประจำตัว', value: 'รหัสประจำตัว',align: 'left',sortable: false, },     
+          { text: 'วัน เดือน ปีเกิด', value: 'วัน เดือน ปีเกิด',align: 'left',sortable: false, },   
+          { text: 'รหัสผ่าน', value: 'รหัสผ่าน',align: 'left',sortable: false, },   
+          { text: 'กลุ่มการเรียน', value: 'กลุ่มการเรียน',align: 'left',sortable: false, },   
           { text: 'ชื่อผู้ใช้', value: 'ผู้เปลี่ยนแปลงข้อมูล',align: 'left',sortable: false,  },
         ],
-        department: []
+        student: []
       }
     },
     async created(){
       this.state=true
-      let res=await this.$http.get('/log/department')
-      this.department=res.data.datas
+      let res=await this.$http.get('/log/student')
+      this.student=res.data.datas
       this.state=false
     },
     computed: {
@@ -75,10 +86,6 @@
       }
     },
     methods:{
-      list_group(g_id){
-        this.$router.push({path: '../manage/group/group_edit?g_id='+g_id})
-      },
-     
     }
   }
 </script>

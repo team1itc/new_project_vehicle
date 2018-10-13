@@ -42,7 +42,7 @@
 
 <script>
   export default {
-    layout: 'manage',
+    layout:sessionStorage.getItem("cv_layout"),
     data () {
       return {
         state:false,
@@ -60,11 +60,17 @@
     },
     async created(){
       this.state=true
-      let res=await this.$http.get('/group/list')
-      //  console.log(res.data.datas)
-      this.group=res.data.datas
-      // console.log("num=".res.data.num)
-      this.state=false
+      if(sessionStorage.getItem("status")=="tch"){
+        let res=await this.$http.post('/group/group_in_teacher',{t_id:sessionStorage.getItem("id")})
+        this.group=res.data.datas
+        this.state=false
+        // console.log("data="+res.data.ok)
+      }else{
+        let res=await this.$http.get('/group/list')
+        this.group=res.data.datas
+        this.state=false
+      }
+      
     },
     computed: {
       pages () {
