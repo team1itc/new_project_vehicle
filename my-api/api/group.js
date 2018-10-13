@@ -24,6 +24,21 @@ router.get('/cus_select/:select', async (req, res) => {//console.log(req.params.
       })
     }catch(e){res.send({ ok: false, error: e.message })}
   })
+router.post('/group_in_teacher/', async (req, res) => {
+    try {
+      let rows = await req.db('pk_group AS g')
+      
+      .select("*")
+      .join('pk_match_std_tch AS mst', 'mst.g_code', 'g.g_code')
+      .join("pk_teacher as t","t.t_id","mst.t_id")
+      .where("t.t_id","=",req.body.t_id)
+      .distinct("mst.g_code")
+      res.send({
+        ok: true,
+        datas: rows || {},
+      })
+    }catch(e){res.send({ ok: false, error: e.message })}
+})
 
 router.get("/sh_group/:g_id",async(req,res)=>{
   console.log('param='+req.params.g_id)

@@ -93,7 +93,7 @@
  </style>
 <script>
     export default {
-        layout: 'manage',
+        layout:sessionStorage.getItem("cv_layout"),
 
         data () {
             return {

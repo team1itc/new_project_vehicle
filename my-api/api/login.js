@@ -41,6 +41,7 @@ router.post('/', async (req, res) => {
       res.send({
         status:"oth",
         ok: false,
+        alt_txt:"รหัสชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง"
       })
     }
 

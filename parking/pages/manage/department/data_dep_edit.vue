@@ -75,7 +75,7 @@
 
 <script>
     export default {
-        layout: 'manage',
+        layout:sessionStorage.getItem("cv_layout"),
         data(){
           return{
             username:sessionStorage.getItem("username"),

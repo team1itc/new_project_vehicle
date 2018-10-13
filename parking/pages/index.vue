@@ -79,28 +79,35 @@ export default {
             sessionStorage.setItem("id",res.data.login.std_id)
             sessionStorage.setItem("username",res.data.login.std_username)
             sessionStorage.setItem("password",(res.data.login.std_password))
+            sessionStorage.setItem("name",(res.data.login.std_name + res.data.login.std_lname))
             sessionStorage.setItem("status",(res.data.status))
+            sessionStorage.setItem("cv_layout","std_layout")
             this.$router.push({name:"mainpersonal"})
             // console.log(res.data)
           }else if(res.data.status=="tch"){
             sessionStorage.setItem("id",res.data.login.t_id)
             sessionStorage.setItem("username",res.data.login.t_username)
             sessionStorage.setItem("password",(res.data.login.t_password))
+            sessionStorage.setItem("name",(res.data.login.t_name))
             sessionStorage.setItem("status",(res.data.status))
+            sessionStorage.setItem("cv_layout","layout_teacher")
             this.$router.push({name:"manage-machines"})
             // console.log(res.data)
           }else if(res.data.status=="bld"){
             sessionStorage.setItem("id",res.data.login.bld_username)
             sessionStorage.setItem("username",res.data.login.bld_username)
             sessionStorage.setItem("password",(res.data.login.bld_password))
+            sessionStorage.setItem("name",(res.data.login.bld_username))
             sessionStorage.setItem("status",(res.data.status))
+            sessionStorage.setItem("cv_layout","manage")
             this.$router.push({name:"manage-machines"})
             //  console.log(res.data)
           }
             
           
-        }else{this.type_api="error",this.danger=true,this.alt_txt=res.data.message}
+        }else{this.type_api="error",this.danger=true,this.alt_txt=res.data.alt_txt}
       }else{this.type_api="error",this.danger=true,this.alt_txt="กรุณากรอกข้อมูล"}
+      
     },
   },
 }

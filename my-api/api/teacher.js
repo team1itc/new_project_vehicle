@@ -153,20 +153,21 @@ router.post("/teacher_update",async(req,res)=>{//console.log(req.body.t_id)
       t_id:req.body.t_id
     })
     if(req.body.mst_1!=""){
-      let mst1=await req.db("pk_match_std_tch").update({
+      let mst1=await req.db("pk_match_std_tch").insert({
         g_code:req.body.mst_1,
-      }).where({
         t_id:req.body.t_id
       })
     }
     if(req.body.mst_2!=""){
-      let mst2=await req.db("pk_match_std_tch").update({
+      let mst2=await req.db("pk_match_std_tch").insert({
         g_code:req.body.mst_2,
+        t_id:req.body.t_id
       })
     }
     if(req.body.mst_3!=""){
-      let mst3=await req.db("pk_match_std_tch").update({
+      let mst3=await req.db("pk_match_std_tch").insert({
         g_code:req.body.mst_3,
+        t_id:req.body.t_id
       })
     }
     let log=await req.db("pk_teacher_log").insert({
@@ -185,19 +186,28 @@ router.post("/teacher_update",async(req,res)=>{//console.log(req.body.t_id)
   }catch(e){res.send({ok:false,txt:"ไม่สามารถแก้ไขข้อมูล "+req.body.t_code+" ได้",alt:"error"})}
 })
 
-router.post("/profile_update",async(req,res)=>{//console.log(req.body.t_id)
+router.post("/profile_update",async(req,res)=>{//console.log(req.body.username)
   try{
     let sql=await req.db("pk_teacher").update({
         t_code:req.body.t_code,
         t_name:req.body.t_name,
         t_dep:req.body.t_dep,
         t_tel:req.body.t_tel,
-      	t_username:req.body.t_username,
-      	t_password:req.body.t_password
     }).where({
       t_id:req.body.t_id
     })
     
+    let log=await req.db("pk_teacher_log").insert({
+      t_id:req.body.t_id,
+      t_code:req.body.t_code,
+      t_name:req.body.t_name,
+      t_dep:req.body.t_dep,
+      t_tel:req.body.t_tel,
+      t_password:req.body.t_password,
+      t_log_work:"แก้ไขข้อมูล",
+      u_id:req.body.username
+
+  })
     res.send({ok:true,txt:"แก้ไขข้อมูล "+req.body.t_code+" สำเร็จ",alt:"success"})
   }catch(e){res.send({ok:false,txt:"ไม่สามารถแก้ไขข้อมูล "+req.body.t_code+" ได้",alt:"error"})}
 })
@@ -209,37 +219,13 @@ router.post("/select_id",async(req,res)=>{ console.log("joy"+req.body.t_id)
     }).where({
       t_id:req.body.t_id
     })
+    let log=await req.db("pk_teacher_log").insert({
+      t_id:req.body.t_id,
+      t_password:req.body.t_password,
+      t_log_work:"แก้ไขข้อมูล",
+      u_id:req.body.t_username
+    })
     
     res.send({ok:true,txt:"แก้ไขข้อมูล "+req.body.t_password+" สำเร็จ",alt:"success"})
   }catch(e){res.send({ok:false,txt:"ไม่สามารถแก้ไขข้อมูล "+req.body.t_password+" ได้",alt:"error"})}
 })
-
-
-router.post('/save2', (req, res) => {
-  let db = req.db  
-  db('t1').insert({}).then(ids => {
-    let id = ids[0]
-    Promise.all([
-      db('t2').insert({}).catch(),
-      db('t3').insert({}).catch(),
-    ]).then(() => {
-      res.send({status: true})
-    }).catch(err => {
-      res.send({status: false})
-    })    
-  })
-  console.log('ok')
-})
-// router.get('/save3', async (req, res) => {
-//   try {
-//     let db = req.db  
-//     let ids = await db('t1').insert({})
-//     await Promise.all([
-//       db('t2').insert({}),
-//       db('t3').insert({})
-//     ])
-//     res.send({status: true})
-//   } catch (e) {
-//     res.send({status: false})
-//   }
-// })
