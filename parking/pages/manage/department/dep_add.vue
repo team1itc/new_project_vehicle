@@ -46,8 +46,8 @@
         </v-container>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn flat color="red lighten-2" @click="department()">ยกเลิก</v-btn>
-          <v-btn flat color="primary" @click="department_add()">บันทึก</v-btn>
+          <v-btn round color="error" @click="department()">ยกเลิก</v-btn>
+          <v-btn round color="primary" @click="department_add()">บันทึก</v-btn>
         </v-card-actions>
     </v-card>
 </template>

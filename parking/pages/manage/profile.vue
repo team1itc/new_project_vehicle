@@ -13,15 +13,10 @@
         >
           แก้ไขข้อมูลส่วนตัว
           <v-spacer></v-spacer>
-          <v-btn
-            color="green lighten-2"
-            flat
-            @click="isEditing = !isEditing"
-          >
-            <i v-if="isEditing" class="fas fa-times fa-2x"></i>
-            <i v-else class="fas fa-edit fa-2x "></i>
-          </v-btn>
-         
+         <v-btn fab dark small color="primary"  @click="isEditing = !isEditing">
+        <v-icon dark v-if="isEditing">fas fa-times</v-icon>
+        <v-icon dark  v-else>edit</v-icon>
+      </v-btn>
         </v-card-title>
         <v-container grid-list-sm class="pa-4">
           <v-layout row wrap>
@@ -117,8 +112,9 @@
         </v-container>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn flat color="red lighten-2" @click="teacher()">ย้อนกลับ</v-btn>
-          <v-btn flat color="primary" :disabled="!isEditing" @click="profile_update()">บันทึก</v-btn>
+          <v-btn round color="success" dask @click="teacher()">ย้อนกลับ</v-btn>
+          <v-btn round color="primary" :disabled="!isEditing" @click="profile_update()">บันทึก</v-btn>
+
         </v-card-actions>
     </v-card>
 </template>
@@ -153,6 +149,7 @@
             isEditing:null,
             alt_txt:"",
             stg_password: false,
+            loading:false,
 
             gro1: [
               'IT A1'
