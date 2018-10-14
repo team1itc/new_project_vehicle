@@ -51,7 +51,7 @@
 
 <script>
   export default {
-    layout: 'manage',
+    layout:sessionStorage.getItem("cv_layout"),
     data () {
       return {
         state:true,
@@ -83,14 +83,14 @@
         this.std=res.data.datas
         this.state=false
       }
-      
-      
+ 
     },
     computed: {
       pages () {
         if (this.pagination.rowsPerPage == null || this.pagination.totalItems == null) return 0
         return Math.ceil(this.pagination.totalItems / this.pagination.rowsPerPage)
       },
+      
       // filter_std(){
       //   return this.std.filter(>>ชื่อตัวแปร<<=>''+>>ชื่อตัวแปร<<.>>field<<===this.filter)
       // },

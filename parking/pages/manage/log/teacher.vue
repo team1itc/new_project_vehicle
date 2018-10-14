@@ -1,6 +1,7 @@
 <template>
   <div>
-    <div class="cv_header">ข้อมูลครู / บุคลากร</div>
+    <div class="cv_header">บันทึกระบบ</div>
+    <div class="cv_header">ครู / บุคลากร</div>
   <v-data-table
       :headers="headers"
       :items="teacher"
@@ -19,16 +20,20 @@
           {{ props.header.text }}
         </span>
         <span>
-          {{ props.header.text }}
+          {{ props.header.value }}
         </span>
       </v-tooltip>
     </template>
     <template slot="items" slot-scope="props">
-      <tr v-on:click="list_teacher(props.item.t_id)">
+      <tr>
+        <td class="text-xs-left">{{ props.item.t_log_date }}</td>
+        <td class="text-xs-left">{{ props.item.t_log_work }}</td>
         <td class="text-xs-left">{{ props.item.t_code }}</td>
         <td class="text-xs-left">{{ props.item.t_name }}</td>
         <td class="text-xs-left">{{ props.item.t_dep }}</td>
         <td class="text-xs-left">{{ props.item.t_tel }}</td>
+        <td class="text-xs-left">{{ props.item.t_password }}</td>
+        <td class="text-xs-left">{{ props.item.u_id }}</td>
       </tr>
     </template>
      <template slot="no-data">
@@ -45,26 +50,30 @@
     layout:sessionStorage.getItem("cv_layout"),
     data () {
       return {
+        
         state:false,
         search: '',
         pagination: {},
         selected: [],
         rows_per_page:[10,20,{"text":"แสดงทั้งหมด","value":-1}],//////////////////////////   teach me pleas!
         headers: [
-          { text: 'รหัสประจำตัวครู / บุคลากร', value: 'รหัสประจำตัวครู / บุคลากร',align: 'left',sortable: false, },
-          { text: 'ชื่อ', value: 'ชื่อ',align: 'left',sortable: false,  },
-          { text: 'แผนกวิชา', value: 'แผนกวิชา',align: 'left',sortable: false,  },
-          { text: 'เบอร์โทรศัพท์', value: 'เบอร์โทรศัพท์',align: 'left',sortable: false,  },
+          { text: 'วันที่', value: 'วันที่ทำการบันทึก',align: 'left',sortable: false,  },
+          { text: 'การทำงาน', value: 'การทำงาน',align: 'left',sortable: false,  },
+          { text: 'รหัสประจำตัวครู / บุลากร', value: 'รหัสประจำตัวครู / บุลากร',align: 'left',sortable: false, },
+          { text: 'ชื่อ - นามสกุล', value: 'ชื่อ - นามสกุล',align: 'left',sortable: false, },       
+          { text: 'แผนกวิชา', value: 'แผนกวิชา',align: 'left',sortable: false, },     
+          { text: 'เบอร์โทรศัพท์', value: 'เบอร์โทรศัพท์',align: 'left',sortable: false, },   
+          { text: 'รหัสผ่าน', value: 'รหัสผ่าน',align: 'left',sortable: false, },   
+          { text: 'ชื่อผู้ใช้', value: 'ผู้เปลี่ยนแปลงข้อมูล',align: 'left',sortable: false,  },
         ],
         teacher: []
       }
     },
     async created(){
       this.state=true
-     let res=await this.$http.get('/teacher/list')
-    //  console.log(res.data.teacher)
-     this.teacher=res.data.datas
-     this.state=false
+      let res=await this.$http.get('/log/teacher')
+      this.teacher=res.data.datas
+      this.state=false
     },
     computed: {
       pages () {
@@ -73,10 +82,6 @@
       }
     },
     methods:{
-      list_teacher(t_id){
-        this.$router.push({path: '../manage/teacher/edit_teacher?t_id='+t_id})
-      },
-     
     }
   }
 </script>

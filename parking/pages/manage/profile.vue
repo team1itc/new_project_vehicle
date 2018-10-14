@@ -76,21 +76,7 @@
                 ></v-text-field>
               </v-layout>
             </v-flex>
-            <v-flex xs12 >
-              <v-layout align-center>
-                <v-text-field 
-                  :disabled="!isEditing"
-                  :rules="[rules.required]"
-                  maxlength="10"
-                  counter
-                  prepend-icon="fas fa-id-badge fa-2x"
-                  label="ชื่อผู้ใช้"
-                  name="t_username"
-                  v-model="t_username"
-                ></v-text-field>
-              </v-layout>
-            </v-flex>
-            <v-flex xs12 >
+            <!-- <v-flex xs12 >
               <v-layout align-center>
                 <v-text-field
                   :disabled="!isEditing"
@@ -106,7 +92,7 @@
                   @click:append="stg_password = !stg_password"
                 ></v-text-field>
               </v-layout>
-            </v-flex>
+            </v-flex> -->
            
           </v-layout>
         </v-container>
@@ -120,28 +106,23 @@
 </template>
 <script>
     export default {
-        layout: 'manage',
+        layout:sessionStorage.getItem("cv_layout"),
         data () {
           return {
               t_id:sessionStorage.getItem("id"),
-              // t_code:sessionStorage.getItem("t_code"),
-              // t_name:sessionStorage.getItem("t_name"),
-              // t_dep:sessionStorage.getItem("t_dep"),
-              // t_tel:sessionStorage.getItem("t_tel"),
-              // t_username:sessionStorage.getItem("t_username"),
-              // t_password:sessionStorage.getItem("t_password"),
+              username:sessionStorage.getItem("username"),
+              t_code:"",
+              t_name:"",
+              t_dep:"",
+              t_tel:"",
+              t_username:"",
+              t_password:"",
 
-            t_code:"",
-            t_name:"",
-            t_dep:"",
-            t_tel:"",
-            t_username:"",
-            t_password:"",
+              mst_1: '',
+              mst_2: '',
+              mst_3: '',
 
-            mst_1: '',
-            mst_2: '',
-            mst_3: '',
-
+<<<<<<< HEAD
             type_api:"",
             danger:false,
             loading: false,
@@ -150,22 +131,31 @@
             alt_txt:"",
             stg_password: false,
             loading:false,
+=======
+              type_api:"",
+              danger:false,
+              loading: false,
+              conf_del:false,
+              isEditing:null,
+              alt_txt:"",
+              stg_password: false,
+>>>>>>> dd929714fb897c82f7b483379316d130d58b8332
 
-            gro1: [
-              'IT A1'
-            ],
-            gro2: [
-              'IT B1'
-            ],
-            gro3: [
-             'IT C1'
-            ],
-             rules: {
-                required: value => !!value || 'ห้ามว่าง.',
-                min: v => v.length >= 8 || 'Password ไม่ควรน้อยกว่า 8 ตัวอักษร',
-                emailMatch: () => ('The email and password you entered don\'t match'),
+              gro1: [
+                'IT A1'
+              ],
+              gro2: [
+                'IT B1'
+              ],
+              gro3: [
+              'IT C1'
+              ],
+              rules: {
+                  required: value => !!value || 'ห้ามว่าง.',
+                  min: v => v.length >= 8 || 'Password ไม่ควรน้อยกว่า 8 ตัวอักษร',
+                  emailMatch: () => ('The email and password you entered don\'t match'),
 
-              },
+                },
           }
         },
         async created(){
@@ -179,28 +169,27 @@
               this.t_name=res.data.datas.t_name
               this.t_dep=res.data.datas.t_dep
               this.t_tel=res.data.datas.t_tel
-              this.t_username=res.data.datas.t_username
               this.t_password=res.data.datas.t_password
             
             },
             async profile_update(){
               // console.log("t_id"+sessionStorage.getItem("id"))
               let res=await this.$http.post("/teacher/profile_update",{
-                
+                t_id:this.t_id,
         				t_code:this.t_code,
         				t_name:this.t_name,
         				t_dep:this.t_dep,
         				t_tel:this.t_tel,
-        				t_username:this.t_username,
-        				t_password:this.t_password,
+        			
                 t_id:sessionStorage.getItem("id"),
+                username:this.username
               })
               console.log(res.data)
                 if(res.data.ok==true){this.danger=true,this.alt_txt=res.data.txt,this.type_api=res.data.alt}
             	 else{this.danger=true,this.alt_txt=res.data.txt,this.type_api=res.data.alt}
             },
             teacher(){
-              this.$router.push({name:"manage-teacher"})
+              this.$router.push({name:"manage-machines"})
             }
         }
     }

@@ -87,41 +87,49 @@
                 ></v-text-field>
               </v-layout>
             </v-flex>
-            <v-flex xs4>
-              <v-select
-                :disabled="!isEditing"
-                :items="gro1"
-                v-model="std_gro1"
-                menu-props="auto"
-                label="กลุ่มการเรียนที่ 1"
-                hide-details
-                prepend-icon="fas fa-users"
-                single-line
-                ></v-select>
+            <v-flex xs12 >
+              <v-layout align-center>
+                <v-text-field
+                  :disabled="!isEditing"
+                  prepend-icon="fas fa-key"
+                  :append-icon="stg_password ? 'visibility' : 'visibility_off'"
+                  :rules="[rules.required]"
+                  :type="stg_password ? 'text' : 'password'"
+                  label="รหัสผ่าน"
+                  v-model="t_password"
+                  @click:append="stg_password = !stg_password"
+                ></v-text-field>
+              </v-layout>
+            </v-flex>      
+            <v-flex xs4 >
+              <v-layout align-center>
+                <v-text-field 
+                  :disabled="!isEditing"
+                  prepend-icon="fas fa-users"
+                  v-model="mst_1"
+                  placeholder="รหัสกลุ่มการเรียนที่ 1"
+                ></v-text-field>
+              </v-layout>
             </v-flex>
-            <v-flex xs4>
-              <v-select
-                :disabled="!isEditing"
-                :items="gro2"
-                v-model="std_gro2"
-                menu-props="auto"
-                label="กลุ่มการเรียนที่ 2"
-                hide-details
-                prepend-icon="fas fa-users"
-                single-line
-                ></v-select>
+            <v-flex xs4 >
+              <v-layout align-center>
+                <v-text-field 
+                  :disabled="!isEditing"
+                  prepend-icon="fas fa-users"
+                  v-model="mst_2"
+                  placeholder="รหัสกลุ่มการเรียนที่ 2"
+                ></v-text-field>
+              </v-layout>
             </v-flex>
-            <v-flex xs4>
-              <v-select
-                :disabled="!isEditing"
-                :items="gro3"
-                v-model="std_gro3"
-                menu-props="auto"
-                label="กลุ่มการเรียนที่ 3"
-                hide-details
-                prepend-icon="fas fa-users"
-                single-line
-                ></v-select>
+           <v-flex xs4 >
+              <v-layout align-center>
+                <v-text-field 
+                  :disabled="!isEditing"
+                  prepend-icon="fas fa-users"
+                  v-model="mst_3"
+                  placeholder="รหัสกลุ่มการเรียนที่ 3"
+                ></v-text-field>
+              </v-layout>
             </v-flex>
            
           </v-layout>
@@ -135,21 +143,22 @@
 </template>
 <script>
     export default {
-        layout: 'manage',
+        layout:sessionStorage.getItem("cv_layout"),
         data () {
           return {
+            username:sessionStorage.getItem("username"),
             t_id:'',
             t_code:"",
             t_name:"",
             t_dep:"",
             t_tel:"",
-            t_username:"",
             t_password:"",
 
             mst_1: '',
             mst_2: '',
             mst_3: '',
 
+            stg_password: false,
             type_api:"",
             danger:false,
             loading: false,
@@ -178,7 +187,18 @@
         methods:{
             conf_del(){this.conf_del=true},
             async teacher_del(){
-              let res=await this.$http.get('/teacher/teacher_del/'+this.$route.query.t_id)
+              let res=await this.$http.post('/teacher/teacher_del',{
+                t_code:this.t_code,
+        				t_name:this.t_name,
+        				t_dep:this.t_dep,
+        				t_tel:this.t_tel,
+        				t_password:this.t_password,
+                t_id:this.$route.query.t_id,
+                mst_1:this.mst_1,
+                mst_2:this.mst_2,
+                mst_3:this.mst_3,
+                username:this.username
+              })
               if(res.data.ok==true){this.$router.push({name:"manage-teacher"})}
               else{this.danger=true,this.alt_txt=res.data.txt,this.type_api=res.data.alt}
             },
@@ -189,8 +209,11 @@
               this.t_name=res.data.datas.t_name
               this.t_dep=res.data.datas.t_dep
               this.t_tel=res.data.datas.t_tel
-              this.t_username=res.data.datas.t_username
               this.t_password=res.data.datas.t_password
+
+              this.mst_1=res.data.msts1.g_code
+              this.mst_2=res.data.msts2.g_code
+              this.mst_3=res.data.msts3.g_code
             
             },
             async teacher_update(t_id){
@@ -201,9 +224,12 @@
         				t_name:this.t_name,
         				t_dep:this.t_dep,
         				t_tel:this.t_tel,
-        				t_username:this.t_username,
         				t_password:this.t_password,
                 t_id:t_id,
+                mst_1:this.mst_1,
+                mst_2:this.mst_2,
+                mst_3:this.mst_3,
+                username:this.username
               })
               console.log(res.data)
                 if(res.data.ok==true){this.danger=true,this.alt_txt=res.data.txt,this.type_api=res.data.alt}

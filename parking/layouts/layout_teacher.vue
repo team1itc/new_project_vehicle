@@ -169,32 +169,14 @@
           text: 'เพิ่มข้อมูล',
           model: false,
           children: [
-            { icon:'add' ,text: 'นักเรียน / นักศึกษา' ,link: '../../manage/student/add_student'},
-            { icon:'add' ,text: 'ครู / บุคลากร' ,link: '../../manage/teacher/add_teacher'},
-            { icon:'add' ,text: 'แผนกวิชา' ,link: '../../manage/department/dep_add'},
             { icon:'add', text: 'กลุ่มการเรียน' ,link: '../../manage/group/add_group'},
             { icon:'add' ,text: 'ยานพาหนะ' ,link: '../../manage/machines/data_add_machine'},
           ]
         },
-
-        { icon: 'fas fa-user-graduate', text: 'นักเรียน / นักศึกษา' ,link: '../../manage/student'},
-        { icon: 'fas fa-chalkboard-teacher', text: 'ครู / บุคลากร' ,link: '../../manage/teacher'},
-        { icon: 'fas fa-place-of-worship', text: 'แผนกวิชา' ,link: '../../manage/department'},
         { icon: 'fas fa-users', text: 'กลุ่มการเรียน' ,link: '../../manage/group'},
         { icon: 'fas fa-motorcycle', text: 'ยานพาหนะ' ,link: '../../manage/machines'},
 
-        { divider: true },
-        { icon: 'keyboard_arrow_up',
-          'icon-alt': 'fas fa-book', 
-          text: 'บันทึกระบบ' , 
-          children: [
-            { icon: 'fas fa-user-graduate', text: 'นักเรียน / นักศึกษา' ,link: '../../manage/log/student'},
-            { icon: 'fas fa-chalkboard-teacher', text: 'ครู / บุคลากร' ,link: '../../manage/log/teacher'},
-            { icon: 'fas fa-place-of-worship', text: 'แผนกวิชา' ,link: '../../manage/log/department'},
-            { icon: 'fas fa-users', text: 'กลุ่มการเรียน' ,link: '../../manage/log/group'},
-            { icon: 'fas fa-motorcycle', text: 'ยานพาหนะ' ,link: '../../manage/log/machines'},
-        ]},
-
+      
         { divider: true },
         { 
          icon: 'keyboard_arrow_up',

@@ -1,10 +1,10 @@
 <template>
   <div>
     <div class="cv_header">บันทึกระบบ</div>
-    <div class="cv_header">แผนกวิชา</div>
+    <div class="cv_header">พาหนะ</div>
   <v-data-table
       :headers="headers"
-      :items="department"
+      :items="machine"
       :search="search"
       :pagination.sync="pagination"
       :loading=state
@@ -26,10 +26,12 @@
     </template>
     <template slot="items" slot-scope="props">
       <tr>
-        <td class="text-xs-left">{{ props.item.d_log_date }}</td>
-        <td class="text-xs-left">{{ props.item.d_log_work }}</td>
-        <td class="text-xs-left">{{ props.item.d_code }}</td>
-        <td class="text-xs-left">{{ props.item.d_name }}</td>
+        <td class="text-xs-left">{{ props.item.mc_log_date }}</td>
+        <td class="text-xs-left">{{ props.item.mc_log_work }}</td>
+        <td class="text-xs-left">{{ props.item.mc_code }}</td>
+        <td class="text-xs-left">{{ props.item.mc_brand }}</td>
+        <td class="text-xs-left">{{ props.item.mc_series }}</td>
+        <td class="text-xs-left">{{ props.item.std_id }}</td>
         <td class="text-xs-left">{{ props.item.u_id }}</td>
       </tr>
     </template>
@@ -47,6 +49,7 @@
     layout:sessionStorage.getItem("cv_layout"),
     data () {
       return {
+        
         state:false,
         search: '',
         pagination: {},
@@ -55,17 +58,19 @@
         headers: [
           { text: 'วันที่', value: 'วันที่ทำการบันทึก',align: 'left',sortable: false,  },
           { text: 'การทำงาน', value: 'การทำงาน',align: 'left',sortable: false,  },
-          { text: 'รหัสแผนก', value: 'รหัสแผนก',align: 'left',sortable: false, },
-          { text: 'ชื่อแผนก', value: 'ชื่อแผนก',align: 'left',sortable: false, },          
+          { text: 'ทะเบียนรถ', value: 'ทะเบียนรถ',align: 'left',sortable: false, },
+          { text: 'แบรนด์รถ', value: 'แบรนด์รถ',align: 'left',sortable: false, },     
+          { text: 'รุ่นรถ', value: 'รุ่นรถ',align: 'left',sortable: false, },       
+          { text: 'เจ้าของรถ', value: 'เจ้าของรถ',align: 'left',sortable: false, },     
           { text: 'ชื่อผู้ใช้', value: 'ผู้เปลี่ยนแปลงข้อมูล',align: 'left',sortable: false,  },
         ],
-        department: []
+        machine: []
       }
     },
     async created(){
       this.state=true
-      let res=await this.$http.get('/log/department')
-      this.department=res.data.datas
+      let res=await this.$http.get('/log/machine')
+      this.machine=res.data.datas
       this.state=false
     },
     computed: {
@@ -75,10 +80,6 @@
       }
     },
     methods:{
-      list_group(g_id){
-        this.$router.push({path: '../manage/group/group_edit?g_id='+g_id})
-      },
-     
     }
   }
 </script>
