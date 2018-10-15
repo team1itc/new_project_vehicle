@@ -121,8 +121,7 @@
               mst_1: '',
               mst_2: '',
               mst_3: '',
-
-<<<<<<< HEAD
+              
             type_api:"",
             danger:false,
             loading: false,
@@ -131,7 +130,7 @@
             alt_txt:"",
             stg_password: false,
             loading:false,
-=======
+
               type_api:"",
               danger:false,
               loading: false,
@@ -139,7 +138,6 @@
               isEditing:null,
               alt_txt:"",
               stg_password: false,
->>>>>>> dd929714fb897c82f7b483379316d130d58b8332
 
               gro1: [
                 'IT A1'
