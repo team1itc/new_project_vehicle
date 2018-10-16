@@ -13,16 +13,15 @@
         >
           แก้ไขข้อมูลกลุ่ม    
           <v-spacer></v-spacer>
-          <v-btn
-            color="green lighten-2"
-            flat
-            @click="isEditing = !isEditing"
-          >
-            <i v-if="isEditing" class="fas fa-times fa-2x"></i>
-            <i v-else class="fas fa-edit fa-2x "></i>
-          </v-btn>
+          <v-btn fab dark small color="primary"  @click="isEditing = !isEditing">
+        <v-icon dark v-if="isEditing">fas fa-times</v-icon>
+        <v-icon dark  v-else>edit</v-icon>
+      </v-btn>
           <v-dialog v-model="conf_del" persistent max-width="290">
-            <v-btn slot="activator" flat color="red lighten-2"><i class="fas fa-trash-alt fa-2x"></i></v-btn>
+            <v-btn fab dark small color="red" slot="activator">
+           <v-icon dark>fas fa-trash-alt</v-icon>
+           </v-btn>
+            <!-- <v-btn slot="activator" flat color="red lighten-2"><i class="fas fa-trash-alt fa-2x"></i></v-btn> -->
             <v-card>
               <v-card-title class="headline">ยืนยันการลบข้อมูล</v-card-title>
               <v-card-text>ต้องการลบข้อมูล {{g_name}}<br> ใช่หรือไม่?</v-card-text>
@@ -85,8 +84,8 @@
           <v-btn flat color="green darken-3" @click="student(g_code)"><i class="fas fa-users fa-2x"></i> นักเรียนในกลุ่ม {{nums}} คน</v-btn>
           <v-spacer></v-spacer>
           
-          <v-btn flat color="red lighten-2" @click="group()">ย้อนกลับ</v-btn>
-          <v-btn flat color="primary" :disabled="!isEditing" @click="group_update(g_id)">บันทึก</v-btn>
+          <v-btn round color="success" @click="group()">ย้อนกลับ</v-btn>
+          <v-btn round color="primary" :disabled="!isEditing" @click="group_update(g_id)">บันทึก</v-btn>
         </v-card-actions>
     </v-card>
 </template>

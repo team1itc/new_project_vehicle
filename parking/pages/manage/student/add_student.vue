@@ -133,8 +133,8 @@
         </v-container>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn flat color="red lighten-2" @click="student()">ยกเลิก</v-btn>
-          <v-btn flat color="primary" @click="std_add">บันทึก</v-btn>
+          <v-btn round color="error" @click="student()">ยกเลิก</v-btn>
+          <v-btn round color="primary" @click="std_add">บันทึก</v-btn>
         </v-card-actions>
         
     </v-card>
