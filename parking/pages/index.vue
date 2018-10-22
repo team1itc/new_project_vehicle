@@ -90,7 +90,7 @@ export default {
             sessionStorage.setItem("password",(res.data.login.t_password))
             sessionStorage.setItem("name",(res.data.login.t_name))
             sessionStorage.setItem("status",(res.data.status))
-            sessionStorage.setItem("cv_layout","layout_teacher")
+            sessionStorage.setItem("cv_layout","manage")
             this.$router.push({name:"manage-machines"})
             // console.log(res.data)
           }else if(res.data.status=="bld"){

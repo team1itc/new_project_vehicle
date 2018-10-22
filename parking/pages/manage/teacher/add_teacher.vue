@@ -130,13 +130,10 @@
         </v-container>
         <v-card-actions>
           <v-spacer></v-spacer>
-<<<<<<< HEAD
-          <v-btn round color="success" @click="teacher()">ย้อนกลับ</v-btn>
-          <v-btn round color="primary" @click="teaher_add()">บันทึก</v-btn>
-=======
-          <v-btn flat color="red lighten-2" @click="teacher()">ย้อนกลับ</v-btn>
-          <v-btn flat color="primary" @click="teaher_add()" :disabled="!formIsValid">บันทึก</v-btn>
->>>>>>> dd929714fb897c82f7b483379316d130d58b8332
+
+          <v-btn round color="primary" @click="teacher()">ย้อนกลับ</v-btn>
+          <v-btn round color="success" @click="teaher_add()">บันทึก</v-btn>
+
         </v-card-actions>
     </v-card>
 </template>

@@ -129,12 +129,12 @@
           },
           async sh_group(){
             let res=await this.$http.get('/group/sh_group/'+this.$route.query.g_id)
-            // console.log("api return=".res.data.datas)
+            // console.log("api return="+res.data.nums.length)
             this.g_id=this.$route.query.g_id
             this.g_code=res.data.datas.g_code
             this.g_name=res.data.datas.g_name
             this.d_code=res.data.datas.d_code
-            this.nums=res.data.nums
+            this.nums=res.data.nums.length
           },
           async group_update(g_id){
             //console.log("g_id"+g_id)
