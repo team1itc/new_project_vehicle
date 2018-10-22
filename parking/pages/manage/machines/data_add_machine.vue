@@ -80,8 +80,8 @@
         </v-container>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn round color="primary" @click="machine()">ย้อนกลับ</v-btn>
-          <v-btn round color="success"  @click="machine_add()">บันทึก</v-btn>
+          <v-btn round color="success" @click="machine()">ย้อนกลับ</v-btn>
+          <v-btn round color="primary"  @click="machine_add()">บันทึก</v-btn>
         </v-card-actions>
     </v-card>
 </template>

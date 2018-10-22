@@ -15,20 +15,6 @@ router.get('/list', async (req, res) => {
     res.send({ ok: false, error: e.message })
   }
 })
-router.post("/sh_machine_on_teacher",async (req,res)=>{
-  try{
-    let rows=await req.db("pk_machine as m")
-    .join("pk_student as s","s.std_id","m.std_id")
-    .join("pk_group as g","g.g_code","s.g_code")
-    .join("pk_match_std_tch as mst","mst.g_code","g.g_code")
-    .join("pk_teacher as t","t.t_id","mst.t_id")
-    .where("t.t_id","=",req.body.t_id)
-    res.send({
-      ok:true,
-      datas:rows
-    })
-  }catch(e){res.send({ ok: false, error: e.message })}
-})
 router.get('/cus_select/:select', async (req, res) => {//console.log(req.params.select)
     try {
       let rows = await req.db('pk_machine').select(req.params.select)

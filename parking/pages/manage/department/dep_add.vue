@@ -46,8 +46,8 @@
         </v-container>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn round color="primary" @click="department()">ยกเลิก</v-btn>
-          <v-btn round color="success" @click="department_add()">บันทึก</v-btn>
+          <v-btn round color="error" @click="department()">ยกเลิก</v-btn>
+          <v-btn round color="primary" @click="department_add()">บันทึก</v-btn>
         </v-card-actions>
     </v-card>
 </template>
@@ -77,9 +77,7 @@
                 d_name:this.d_name,
                 username:this.username
               })
-              if(res.data.ok==true){this.danger=true,this.alt_txt=res.data.txt,this.type_api=res.data.alt
-                this.$router.push({name: 'manage-department'})
-              }
+              if(res.data.ok==true){this.danger=true,this.alt_txt=res.data.txt,this.type_api=res.data.alt}
               else{this.danger=true,this.alt_txt=res.data.txt,this.type_api=res.data.alt}
             }else{this.danger=true,this.alt_txt="กรุณากรอกข้อมูลให้ครบ",this.type_api="error"}
           },

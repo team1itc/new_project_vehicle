@@ -133,8 +133,8 @@
         </v-container>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn round color="primary" @click="student()">ย้อนกลับ</v-btn>
-          <v-btn round color="success" @click="std_add">บันทึก</v-btn>
+          <v-btn round color="error" @click="student()">ยกเลิก</v-btn>
+          <v-btn round color="primary" @click="std_add">บันทึก</v-btn>
         </v-card-actions>
         
     </v-card>
@@ -202,7 +202,7 @@
               g_code:this.g_code,
               username:this.username
             })
-            if(res.data.ok==true){this.danger=true,this.alt_txt=res.data.txt,this.type_api=res.data.alt,this.$router.push({name:"manage-student"})}
+            if(res.data.ok==true){this.danger=true,this.alt_txt=res.data.txt,this.type_api=res.data.alt}
             else{this.danger=true,this.alt_txt=res.data.txt,this.type_api=res.data.alt}
           },
           async sh_group(){

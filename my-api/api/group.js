@@ -47,16 +47,10 @@ router.get("/sh_group/:g_id",async(req,res)=>{
     let row = await req.db('pk_group').select('*').where({
       g_id: req.params.g_id
     })
+    let num_rows=await req.db("pk_student").count("std_id as num")
+    .innerJoin('pk_group', 'pk_student.g_code', 'pk_group.g_code')
+    .where("g_id",req.params.g_id)
     
-    
-    let num_rows=await req.db("pk_student as std")//.count("std_id as num")
-    // .innerJoin('pk_group', 'pk_student.g_code', 'pk_group.g_code')
-    // .where("pk_group.g_id",req.params.g_id)
-    
-    .select("*")
-    .join('pk_group AS g', 'g.g_code', 'std.g_code')
-    .where("g.g_id","=",req.params.g_id)
-
     res.send({
       ok:true,
       datas: row[0] || {},
