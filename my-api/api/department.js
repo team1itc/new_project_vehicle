@@ -6,7 +6,7 @@ module.exports = router
 
 router.get('/list', async (req, res) => {
   try {
-    let rows = await req.db('pk_department').select('*').orderBy("d_id","desc")
+    let rows = await req.db('pk_department').select('*')
     res.send({
       ok: true,
       datas: rows,
@@ -41,40 +41,21 @@ router.get("/sh_dep/:d_id",async(req,res)=>{
   }
 })
 
-router.post("/dep_add",async (req,res)=>{//console.log("u_id="+req.body.u_id)
+router.post("/dep_add",async (req,res)=>{
   try{
     let d_id=await req.db("pk_department").insert({
       	d_code:req.body.d_code,
         d_name:req.body.d_name,
-      
-    })
-    let log=await req.db("pk_department_log").insert({
-      d_id:d_id,
-      d_code:req.body.d_code,
-      d_name:req.body.d_name,
-      u_id:req.body.username,
-      d_log_work:"เพิ่มข้อมูล",
 
     })
     res.send({ok:true,txt:"เพิ่มข้อมูล "+req.body.d_name+" สำเร็จ",alt:"success"})
-  }catch(e){res.send({ok:false,txt:"ไม่สามารถเพิ่มข้อมูล "+req.body.d_name+" ได้",alt:"error"})}
-
-  
-  
+  }catch(e){res.send({ok:false,txt:"ไม่สามารถเพิ่มข้อมูลได้",alt:"error"})}
 })
 
-router.post("/dep_del",async (req,res)=>{
-  console.log("log="+req.body)
+router.get("/dep_del/:d_id",async (req,res)=>{//console.log(req.params.d_id)
   try{
     let d_id=await req.db("pk_department").del().where({
-      d_id:req.body.d_id
-    })
-    let log=await req.db("pk_department_log").insert({
-      d_id:req.body.d_id,
-      d_code:req.body.d_code,
-      d_name:req.body.d_name,
-      u_id:req.body.username,
-      d_log_work:"ลบข้อมูล"
+      d_id:req.params.d_id
     })
     res.send({ok:true,txt:"ลบข้อมูล "+req.body.d_id+" สำเร็จ",alt:"success"})
   }catch(e){res.send({ok:false,txt:"ไม่สามารถลบข้อมูลได้",alt:"error"})}
@@ -87,13 +68,6 @@ router.post("/dep_update",async(req,res)=>{//console.log(req.body.d_id)
 
     }).where({
       d_id:req.body.d_id
-    })
-    let log=await req.db("pk_department_log").insert({
-      d_id:req.body.d_id,
-      d_code:req.body.d_code,
-      d_name:req.body.d_name,
-      u_id:req.body.username,
-      d_log_work:"แก้ไขข้อมูล"
     })
     res.send({ok:true,txt:"แก้ไขข้อมูล "+req.body.d_name+" สำเร็จ",alt:"success"})
   }catch(e){res.send({ok:false,txt:"ไม่สามารถแก้ไขข้อมูล "+req.body.d_name+" ได้",alt:"error"})}
