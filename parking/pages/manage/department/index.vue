@@ -58,10 +58,10 @@
     },
     async created(){
       this.state=true
-     let res=await this.$http.get('/department/list')
-    //  console.log(res.data.department)
-     this.department=res.data.datas
-     this.state=false
+      let res=await this.$http.get('/department/list')
+       console.log(res.data.datas)
+      // this.department=res.data.datas
+      this.state=false
     },
     computed: {
       pages () {

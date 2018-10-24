@@ -54,7 +54,15 @@
                 ></v-text-field>
               </v-layout>
             </v-flex>
-           
+           <v-flex xs12>
+             <v-layout align-center>
+                <v-select
+                  :items="items"
+                  label="Standard"
+        
+                ></v-select>
+             </v-layout>
+           </v-flex>
           </v-layout>
         </v-container>
         <v-card-actions>
@@ -82,9 +90,16 @@
                   required: value => !!value || 'ห้ามว่าง.',
                   // counter: value => value.length <= 10 || 'เต็ม 10 ตัวอักษร',
             },
+            items:[],
           }
         },
-
+        async created(){
+          let res=await this.$http.get('/department/list')
+          // console.log(res.data.datas)
+          this.items=res.data.datas
+          console.log("test")
+          console.log(this.items)
+        },
         methods:{
           async group_add(){
             if(this.g_code!='' && this.g_name!='' && this.d_code!=''){
